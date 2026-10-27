@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ElimuCentral tokens. Values are space-separated RGB so Tailwind opacity modifiers work
+   (bg-primary/10). Every name maps to a key in tailwind.config.js. */
+@layer base {
+  :root {
+    --bg: 250 250 248;
+    --surface: 255 255 255;
+    --surface-2: 245 245 242;
+    --surface-3: 235 235 230;
+    --border: 218 217 211;
+    --border-strong: 168 167 159;
+    --text: 28 27 25;
+    --text-2: 69 68 63;
+    --muted: 90 89 83;
+    --subtle: 110 109 102;
+
+    --primary: 15 86 52;
+    --primary-hover: 12 68 42;
+    --primary-fg: 255 255 255;
+    --primary-soft: 230 242 234;
+    --primary-soft-fg: 12 68 42;
+    --primary-text: 20 107 63;
+
+    --accent: 227 154 46;
+    --accent-hover: 201 127 23;
+    --accent-fg: 28 27 25;
+    --accent-soft: 251 239 216;
+    --accent-text: 132 76 18;
+
+    --success: 23 112 58;
+    --success-bg: 229 243 233;
+    --success-bd: 156 211 174;
+    --warning: 138 75 0;
+    --warning-bg: 255 243 214;
+    --warning-bd: 235 192 106;
+    --danger: 180 35 24;
+    --danger-solid: 195 39 28;
+    --danger-bg: 253 236 234;
+    --danger-bd: 242 164 156;
+    --info: 29 95 168;
+    --info-bg: 232 241 251;
+    --info-bd: 169 200 238;
+    --plum: 107 63 160;
+    --plum-bg: 241 235 250;
+    --plum-bd: 201 179 234;
+
+    --inverse-bg: 28 27 25;
+    --inverse-fg: 250 250 248;
+    --ring: 163 95 0;
+
+    --elevation-sm: 0 1px 2px rgb(28 27 25 / .06), 0 1px 3px rgb(28 27 25 / .08);
+    --elevation-md: 0 4px 8px -2px rgb(28 27 25 / .08), 0 2px 4px -2px rgb(28 27 25 / .06);
+    --elevation-lg: 0 16px 32px -8px rgb(28 27 25 / .18), 0 4px 8px -4px rgb(28 27 25 / .08);
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: 15 18 16;
+    --surface: 22 26 23;
+    --surface-2: 29 34 30;
+    --surface-3: 39 45 40;
+    --border: 50 58 52;
+    --border-strong: 86 97 90;
+    --text: 236 238 234;
+    --text-2: 205 209 203;
+    --muted: 166 172 165;
+    --subtle: 149 156 148;
+
+    --primary: 76 185 126;
+    --primary-hover: 107 203 149;
+    --primary-fg: 6 33 15;
+    --primary-soft: 23 51 35;
+    --primary-soft-fg: 166 227 191;
+    --primary-text: 111 211 156;
+
+    --accent: 237 181 90;
+    --accent-hover: 242 198 122;
+    --accent-fg: 28 27 25;
+    --accent-soft: 58 43 18;
+    --accent-text: 242 198 122;
+
+    --success: 111 211 156;
+    --success-bg: 19 48 31;
+    --success-bd: 42 94 64;
+    --warning: 242 196 107;
+    --warning-bg: 54 40 12;
+    --warning-bd: 107 78 20;
+    --danger: 255 138 128;
+    --danger-solid: 229 72 59;
+    --danger-bg: 58 21 18;
+    --danger-bd: 122 42 35;
+    --info: 138 184 240;
+    --info-bg: 18 37 61;
+    --info-bd: 42 77 128;
+    --plum: 201 168 242;
+    --plum-bg: 42 29 61;
+    --plum-bd: 85 64 122;
+
+    --inverse-bg: 236 238 234;
+    --inverse-fg: 22 26 23;
+    --ring: 242 196 107;
+
+    --elevation-sm: 0 1px 2px rgb(0 0 0 / .4);
+    --elevation-md: 0 4px 10px rgb(0 0 0 / .45);
+    --elevation-lg: 0 16px 36px rgb(0 0 0 / .6);
+    color-scheme: dark;
+  }
+
+  html {
+    @apply bg-bg font-sans text-base text-text antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  :focus-visible {
+    @apply outline outline-[3px] outline-offset-2 outline-ring;
+  }
+
+  [x-cloak] {
+    display: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Text inputs, selects and textareas. 16px text stops Android Chrome zooming on focus. */
+  .ec-control {
+    @apply block w-full min-h-touch appearance-none rounded border border-border-strong bg-surface px-3 py-2.5 text-base text-text placeholder:text-subtle;
+  }
+  .ec-control:hover:not(:disabled) {
+    @apply border-muted;
+  }
+  .ec-control:focus {
+    @apply border-primary outline outline-[3px] outline-offset-1 outline-ring;
+  }
+  .ec-control[aria-invalid='true'] {
+    @apply border-2 border-danger;
+  }
+  .ec-control:disabled {
+    @apply cursor-not-allowed border-border bg-surface-2 text-subtle;
+  }
+
+  /* Input with a prefix/suffix (+254, KES, calendar button). The group draws the border. */
+  .ec-group {
+    @apply flex min-h-touch items-stretch overflow-hidden rounded border border-border-strong bg-surface;
+  }
+  .ec-group:hover {
+    @apply border-muted;
+  }
+  .ec-group:focus-within {
+    @apply border-primary outline outline-[3px] outline-offset-1 outline-ring;
+  }
+  .ec-group:has([aria-invalid='true']) {
+    @apply border-2 border-danger;
+  }
+  .ec-group:has(input:disabled) {
+    @apply border-border bg-surface-2;
+  }
+  .ec-group > input {
+    @apply min-w-0 flex-1 border-0 bg-transparent px-3 py-2.5 text-base text-text outline-none placeholder:text-subtle disabled:text-subtle;
+  }
+  .ec-addon {
+    @apply flex items-center gap-1.5 whitespace-nowrap bg-surface-2 px-3 text-[15px] font-semibold text-text-2;
+  }
+
+  .ec-skeleton {
+    @apply block rounded-md bg-surface-3;
+  }
+
+  .ec-spinner {
+    @apply inline-block size-[18px] shrink-0 rounded-full border-[2.5px] border-current border-r-transparent motion-safe:animate-spin;
+  }
+}

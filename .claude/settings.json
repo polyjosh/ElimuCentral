@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan test:*)",
+      "Bash(php artisan migrate:fresh --seed)",
+      "Bash(php artisan make:*)",
+      "Bash(php artisan route:list:*)",
+      "Bash(vendor/bin/pint:*)",
+      "Bash(npm run build)",
+      "Bash(composer dump-autoload)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  }
+}
