@@ -118,6 +118,7 @@ class MarksEntry extends Component
                 if ($mark && ($item['version'] ?? null) !== $mark->updated_at?->toIso8601String()) {
                     $result['conflicts'][] = $learnerId;
                     $result['current'][$learnerId] = $mark->absent ? 'AB' : $this->formatScore($mark->score);
+
                     continue;
                 }
 
@@ -125,11 +126,13 @@ class MarksEntry extends Component
                     $mark->delete();
                     $result['saved'][] = $learnerId;
                     $result['versions'][$learnerId] = null;
+
                     continue;
                 }
 
                 if ($raw === '') {
                     $result['saved'][] = $learnerId;
+
                     continue;
                 }
 

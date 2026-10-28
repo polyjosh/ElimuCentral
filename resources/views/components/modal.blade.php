@@ -14,7 +14,7 @@
     </x-modal>
 
     Titles are questions; buttons repeat the verb ("Send 48 SMS"), never "OK".
-    Focus is trapped (Alpine focus plugin, bundled with Livewire 3), Esc closes and focus
+    Focus is trapped (Alpine focus plugin, bundled with Livewire), Esc closes and focus
     returns to the trigger.
 --}}
 @props(['name', 'title', 'maxWidth' => 'max-w-[480px]'])

@@ -2,7 +2,7 @@
 
 ## 1. Prerequisites
 
-PHP 8.3, Composer, Node 20+, MySQL 8 (or SQLite for a quick start), Git, VS Code, and Claude Code:
+Docker (PHP 8.4, Composer, MySQL 8.4 and Redis run in containers through Laravel Sail), Node 20+, Git, VS Code, and Claude Code:
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -18,7 +18,7 @@ Then copy **everything in this handoff folder** into `elimucentral/`, including 
 
 ```bash
 cd elimucentral
-git init && git add -A && git commit -m "Laravel 12 + ElimuCentral handoff"
+git init && git add -A && git commit -m "Laravel 13 + ElimuCentral handoff"
 code .
 ```
 
@@ -36,7 +36,7 @@ Claude Code reads `CLAUDE.md` automatically. Then run the phases in order, one p
 /build-phase 0
 ```
 
-Check the result (`composer run dev`, then open http://localhost:8000/ui), commit, and continue with `/build-phase 1` up to `/build-phase 10` (the learner app is `/build-phase 8b`, between 8 and 9). Run `/clear` between phases to start each with a fresh context.
+Check the result (`./vendor/bin/sail up -d` and `npm run dev`, then open http://localhost:8000/ui), commit, and continue with `/build-phase 1` up to `/build-phase 10` (the learner app is `/build-phase 8b`, between 8 and 9). Run `/clear` between phases to start each with a fresh context.
 
 To review a finished screen against the design:
 
@@ -59,4 +59,4 @@ To review a finished screen against the design:
 | `README.md` | The UI kit: tokens and components |
 | `.claude/commands/*` | `/build-phase N`, `/check-screen S#` |
 | `.claude/settings.json` | Pre-approves tests, Pint, migrations and builds; blocks reading `.env` |
-| `tailwind.config.js`, `resources/**`, `app/**`, `config/navigation.php` | The UI kit code |
+| `resources/**` (theme in `resources/css/theme.css`), `app/**`, `config/navigation.php` | The UI kit code |

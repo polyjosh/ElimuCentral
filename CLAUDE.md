@@ -10,22 +10,30 @@ Read these before writing code:
 
 ## Stack (fixed — do not swap)
 
-- PHP 8.3, Laravel 12, Livewire 3 (with its bundled Alpine), Tailwind CSS **3.4** (not v4: the kit's `app.css` uses v3 `@tailwind` / `@apply`), Vite.
-- MySQL 8 (PostgreSQL also fine). Use Redis for queue and cache in production; the `database` driver is fine locally.
-- Tests use Pest. Formatting uses Laravel Pint.
-- Packages that are allowed (ask before adding any others): `mallardduck/blade-lucide-icons`, `spatie/laravel-permission`, `maatwebsite/excel`, `spatie/laravel-pdf` (or `barryvdh/laravel-dompdf` if Chrome is unavailable), `pestphp/pest`, `pestphp/pest-plugin-laravel`, `pestphp/pest-plugin-livewire`.
+- PHP 8.4, Laravel 13, Livewire 4 (with its bundled Alpine), Tailwind CSS 4, Vite. The owner chose the latest versions over the kit's original Laravel 12 / Livewire 3 / Tailwind 3.4 pin (October 2026).
+- **Tailwind 4 has no `tailwind.config.js`.** The theme lives in `resources/css/theme.css` (`@theme`). The default Tailwind palette is switched off, so only the semantic tokens and the brand ramps exist: a class like `text-gray-500` silently generates nothing. `app.css` restores the v3 defaults the kit relies on (border colour, button cursor).
+- **Livewire 4:** `wire:model` binds only on the element that carries it (it no longer picks up events from children), so put it on the real `<input>`, as the kit components already do. Livewire view components live in `resources/views/livewire`; full-page components use the kit layout `components.layouts.app` (`config/livewire.php`).
+- MySQL 8.4 (PostgreSQL also fine). Use Redis for queue and cache in production; the `database` driver is fine locally.
+- Tests use Pest 4. Formatting uses Laravel Pint.
+- Packages that are allowed (ask before adding any others): `mallardduck/blade-lucide-icons`, `spatie/laravel-permission`, `maatwebsite/excel`, `spatie/laravel-pdf` (or `barryvdh/laravel-dompdf` if Chrome is unavailable), `pestphp/pest`, `pestphp/pest-plugin-laravel`, `pestphp/pest-plugin-livewire`, `laravel/sail` (dev only).
 - **No SPA patterns.** No Inertia, Vue or React. Pages are server-rendered Blade or full-page Livewire components. Alpine is used only for small local behaviour.
 
 ## Commands
 
+PHP, Composer and MySQL run in Docker through Laravel Sail (the host machine has no PHP). Node runs on the host.
+
 ```bash
-composer install && npm install
-php artisan migrate:fresh --seed     # seeds the fictional demo school (see DATA_MODEL.md)
-composer run dev                     # serve + queue + vite
-php artisan test                     # Pest
-vendor/bin/pint                      # format before finishing a task
-npm run build                        # must pass before a phase is done
+./vendor/bin/sail up -d                          # app http://localhost:8000, MySQL :3308, Redis :6380
+./vendor/bin/sail composer install && npm install
+./vendor/bin/sail artisan migrate:fresh --seed   # seeds the fictional demo school (see DATA_MODEL.md)
+npm run dev                                      # Vite dev server with hot reload (port 5173)
+./vendor/bin/sail artisan test                   # Pest, against the MySQL `testing` database
+./vendor/bin/sail bin pint                       # format before finishing a task
+npm run build                                    # must pass before a phase is done
+./vendor/bin/sail stop                           # stop the containers (data is kept)
 ```
+
+If PHP 8.4 is ever installed on the host, the plain `php artisan …` / `vendor/bin/pint` forms work too.
 
 ## UI rules
 

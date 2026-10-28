@@ -2,12 +2,12 @@
 
 Drop-in Tailwind theme, Blade components and Alpine helpers that implement the
 ElimuCentral design system (canvas: https://claude.ai/artifact/FJjtFFpYfPaxppzYauAEVa).
-It is built for Laravel Blade, Livewire 3 and Alpine.js, renders on the server and needs no SPA.
+It is built for Laravel Blade, Livewire 4 and Alpine.js, renders on the server and needs no SPA.
 
 ## Requirements
 
-- Laravel 11 or 12, Livewire 3.5+ (bundles Alpine and its focus plugin)
-- Tailwind CSS **3.4+** (`size-*`, `min-h-*` spacing, `h-dvh`). On Tailwind v4, use `resources/css/theme.v4.css` instead of the config file.
+- Laravel 13, Livewire 4 (bundles Alpine and its focus plugin)
+- Tailwind CSS 4. The theme is in `resources/css/theme.css` (`@theme`); there is no `tailwind.config.js`. The kit was first written for Tailwind 3.4 and ported in Phase 0.
 - Icons: [Lucide](https://lucide.dev) as inline SVG components.
   ```bash
   composer require mallardduck/blade-lucide-icons
@@ -20,9 +20,8 @@ It is built for Laravel Blade, Livewire 3 and Alpine.js, renders on the server a
 
    | From this kit | Purpose |
    |---|---|
-   | `tailwind.config.js` | Theme: semantic colours, ramps, type scale, radius, elevation, breakpoints |
    | `resources/css/app.css` | Token variables for light and `.dark`, base styles, `.ec-control` / `.ec-group` |
-   | `resources/css/theme.v4.css` | Same theme for Tailwind v4 (`@theme`) |
+   | `resources/css/theme.css` | Theme (`@theme`): semantic colours, ramps, type scale, radius, elevation, breakpoints. The default palette is off |
    | `resources/js/app.js`, `resources/js/ui/*` | Starts Livewire + Alpine; Alpine data and stores |
    | `resources/views/components/**` | Blade components (below) |
    | `resources/views/livewire/marks-entry.blade.php`, `app/Livewire/MarksEntry.php` | Marks-entry grid |

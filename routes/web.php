@@ -2,6 +2,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Placeholder home until Phase 1 replaces it with the sign-in screen (S1).
+Route::view('/', 'welcome')->name('home');

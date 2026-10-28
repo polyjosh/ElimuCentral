@@ -1,4 +1,4 @@
-// Livewire 3 ships Alpine (with the focus plugin). Import its ESM build so our Alpine data
+// Livewire 4 ships Alpine (with the focus plugin). Import its ESM build so our Alpine data
 // and stores register before Alpine starts; the layout uses @livewireScriptConfig.
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 

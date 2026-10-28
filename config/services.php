@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+    // SMS and M-Pesa go through App\Contracts\SmsGateway / MpesaGateway. The `fake` driver is
+    // the default locally and in tests, so nothing here ever calls a live API by accident.
+    'sms' => [
+        'driver' => env('SMS_DRIVER', 'fake'),
+    ],
+
+    'mpesa' => [
+        'driver' => env('MPESA_DRIVER', 'fake'),
+    ],
+
 ];

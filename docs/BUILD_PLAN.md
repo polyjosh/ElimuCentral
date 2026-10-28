@@ -1,9 +1,11 @@
 # ElimuCentral — build plan
 
 Work top to bottom. One phase per session (`/build-phase N`). A phase is done only when:
-- `php artisan test` is green, `vendor/bin/pint` has run, and `npm run build` succeeds;
+- `sail artisan test` is green, `sail bin pint` has run, and `npm run build` succeeds;
 - every acceptance check below is ticked in your summary, or explicitly marked "not verified" with the reason;
-- the demo seed still runs: `php artisan migrate:fresh --seed`.
+- the demo seed still runs: `sail artisan migrate:fresh --seed`.
+
+(`sail` = `./vendor/bin/sail`; see the Commands section of CLAUDE.md.)
 
 Screens are specified in `docs/SCREENS.md` (S1–S18); tables in `docs/DATA_MODEL.md`.
 
@@ -11,14 +13,13 @@ Screens are specified in `docs/SCREENS.md` (S1–S18); tables in `docs/DATA_MODE
 
 ## Phase 0 — Project setup
 
-Context: the repo is a fresh `laravel/laravel` 12 app with this UI kit copied on top.
+Context: the repo is a fresh `laravel/laravel` 13 app with this UI kit copied on top. The stack was moved to the latest versions (Laravel 13, PHP 8.4, Livewire 4, Tailwind 4) before Phase 0 started; steps 1–2 below reflect that.
 
-1. Install Livewire 3, `mallardduck/blade-lucide-icons`, `spatie/laravel-permission`, and Pest with its Laravel and Livewire plugins.
-2. Replace Laravel 12's Tailwind v4 setup with **Tailwind 3.4**:
-   - Remove `@tailwindcss/vite`.
-   - Install `tailwindcss@^3.4 postcss autoprefixer`.
-   - Add `postcss.config.js`.
-   - Keep the kit's `tailwind.config.js` and `resources/css/app.css`.
+1. Install Livewire 4, `mallardduck/blade-lucide-icons`, `spatie/laravel-permission`, and Pest with its Laravel and Livewire plugins. Add Laravel Sail (dev) for PHP 8.4, MySQL 8.4 and Redis.
+2. Keep Laravel 13's **Tailwind 4** setup (`@tailwindcss/vite`) and port the kit to it:
+   - Move the kit's `tailwind.config.js` theme into `resources/css/theme.css` (`@theme`), including the green / ochre / stone ramps, and delete the config file.
+   - Switch off the default palette so only tokens exist.
+   - Start `app.css` with `@import 'tailwindcss'`, and restore the v3 defaults the kit relies on (border colour, button cursor).
 3. In `vite.config.js`, set the inputs to `resources/css/app.css` and `resources/js/app.js`, and keep `refresh: true`.
 4. Self-host Inter (latin, 400/500/600/700 woff2) under `public/fonts`, add `@font-face` to `app.css`, and remove the Google Fonts `<link>` from the layout.
 5. Config:

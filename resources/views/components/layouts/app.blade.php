@@ -35,10 +35,8 @@
         <script>if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark')</script>
     @endif
 
-    {{-- Self-host Inter (latin subset, 400–700 woff2, ~48 KB) in production; Google Fonts shown for brevity. --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
+    {{-- Inter is self-hosted (public/fonts, latin, 400–700, ~48 KB): no third-party request on 3G. --}}
+    <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
