@@ -1,8 +1,6 @@
-# ElimuCentral UI kit
+# ElimuCentral
 
-Drop-in Tailwind theme, Blade components and Alpine helpers that implement the
-ElimuCentral design system (canvas: https://claude.ai/artifact/FJjtFFpYfPaxppzYauAEVa).
-It is built for Laravel Blade, Livewire 4 and Alpine.js, renders on the server and needs no SPA.
+ElimuCentral is a school management platform for Kenyan schools. It covers the academic year, CBE and 8-4-4 assessment, fees with M-Pesa, and parent communication in English and Kiswahili.
 
 ## Requirements
 
